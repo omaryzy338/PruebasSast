@@ -1,10 +1,12 @@
 rules:
-  - id: sql-injection
+  - id: hardcoded-password-java
     patterns:
-      - pattern: $DB.query($X)
-    message: "Posible SQL Injection: evita concatenar cadenas en consultas."
-    severity: ERROR
-    languages: [python, javascript, java, php]
+      - pattern: String password = "..."
+      - pattern: String PASSWORD = "..."
+    message: "Hardcoded password detectado en Java: usa variables de entorno o gestores de secretos."
+    severity: WARNING
+    languages: [java]
+
 
   - id: command-injection
     patterns:
