@@ -7,19 +7,18 @@ rules:
     severity: WARNING
     languages: [java]
 
-
-  - id: command-injection
+  - id: command-injection-java
     patterns:
-      - pattern: exec($X)
-      - pattern: system($X)
-    message: "Posible Command Injection: evita ejecutar comandos con entradas externas."
+      - pattern: Runtime.getRuntime().exec($X)
+    message: "Posible Command Injection en Java: evita ejecutar comandos con entradas externas."
     severity: ERROR
-    languages: [python, javascript, java, php]
+    languages: [java]
 
-  - id: hardcoded-password
+  - id: sql-injection-java
     patterns:
-      - pattern: password = "..."
-      - pattern: PASSWORD = "..."
-    message: "Hardcoded password detectado: usa variables de entorno o gestores de secretos."
-    severity: WARNING
-    languages: [python, javascript, java, php]
+      - pattern: $ST.executeQuery($X)
+      - pattern: $ST.executeUpdate($X)
+    message: "Posible SQL Injection en Java: evita concatenar cadenas en consultas."
+    severity: ERROR
+    languages: [java]
+
