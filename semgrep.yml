@@ -1,7 +1,7 @@
 rules:
   - id: hardcoded-password-java
     patterns:
-      - pattern: String $VAR = "<...>"
+      - pattern: String $VAR = "..."
       - pattern: String password = "..."
       - pattern: String PASSWORD = "..."
     message: "Hardcoded password detectado en Java: usa variables de entorno o gestores de secretos."
