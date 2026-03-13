@@ -1,0 +1,23 @@
+rules:
+  - id: sql-injection
+    patterns:
+      - pattern: $DB.query($X)
+    message: "Posible SQL Injection: evita concatenar cadenas en consultas."
+    severity: ERROR
+    languages: [python, javascript, java, php]
+
+  - id: command-injection
+    patterns:
+      - pattern: exec($X)
+      - pattern: system($X)
+    message: "Posible Command Injection: evita ejecutar comandos con entradas externas."
+    severity: ERROR
+    languages: [python, javascript, java, php]
+
+  - id: hardcoded-password
+    patterns:
+      - pattern: password = "..."
+      - pattern: PASSWORD = "..."
+    message: "Hardcoded password detectado: usa variables de entorno o gestores de secretos."
+    severity: WARNING
+    languages: [python, javascript, java, php]
